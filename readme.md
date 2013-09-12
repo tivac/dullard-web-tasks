@@ -1,7 +1,7 @@
 Dullard Web Tasks
 =================
 
-Doing the same task repeatedly is boring. Let the computer do it instead.
+Useful web-centric tasks for [Dullard](https://github.com/tivac/dullard)
 
 [![Build Status](https://travis-ci.org/tivac/dullard-web-tasks.png?branch=master)](https://travis-ci.org/tivac/dullard-web-tasks)
 [![Packages](https://david-dm.org/tivac/dullard-web-tasks/status.png)](https://david-dm.org/tivac/dullard-web-tasks/)
