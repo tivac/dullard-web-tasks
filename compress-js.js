@@ -9,10 +9,11 @@ var fs   = require("fs"),
     uglify = require("uglify-js");
 
 module.exports = function(config) {
-    var files = glob.sync("*.js", { cwd : config.cwd });
+    var cwd   = config.public || config.cwd,
+        files = glob.sync("*.js", { cwd : cwd });
     
     files = files.map(function(file) {
-        return path.resolve(path.join(config.cwd, file));
+        return path.resolve(path.join(cwd, file));
     });
     
     files.forEach(function(file) {

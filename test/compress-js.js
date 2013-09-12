@@ -1,7 +1,7 @@
 /*jshint node:true */
 "use strict";
 
-var assert = require("assert"),
+var assert = require("./_assert"),
     
     shell  = require("shelljs"),
     
@@ -25,12 +25,38 @@ describe("Dullard Web Tasks", function() {
             
             files = shell.ls("./test/working/*.js");
             assert.equal(files.length, 1);
-            
-            // TODO: check that file was compressed correctly by comparing against /simple/result/name.js
         });
         
-        it("should find *.js files in cwd + config.public");
-        it("should compress files");
+        it("should find *.js files in cwd + config.public", function() {
+            var err, files;
+            
+            shell.cp("-rf", "./test/specimens/simple/source/*", "./test/working");
+            
+            err = task({ public : "./test/working" });
+            
+            assert.ifError(err);
+            
+            files = shell.ls("./test/working/*.js");
+            assert.equal(files.length, 1);
+        });
+
+        it("should compress files", function() {
+            var err, files;
+            
+            shell.cp("-rf", "./test/specimens/simple/source/*", "./test/working");
+            
+            err = task({ cwd : "./test/working" });
+            
+            assert.ifError(err);
+            
+            files = shell.ls("./test/working/*.js");
+            assert.equal(files.length, 1);
+            
+            files.forEach(function(file) {
+                assert.filesEqual(file, file.replace("working", "specimens/simple/result"));
+            });
+        });
+
         it("should support compression options");
     });
 });
