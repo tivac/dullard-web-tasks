@@ -7,13 +7,14 @@ var fs   = require("fs"),
 
     async  = require("async"),
     glob   = require("glob"),
-    cssmin = require("ycssmin");
+    cssmin = require("ycssmin").cssmin;
 
 module.exports = function(config, done) {
-    var files = glob.sync("*.css", { cwd : config.cwd });
+    var cwd   = config.public || config.cwd,
+        files = glob.sync("*.css", { cwd : cwd });
     
     files = files.map(function(file) {
-        return path.resolve(path.join(config.cwd, file));
+        return path.resolve(path.join(cwd, file));
     });
     
     async.each(
